@@ -7,8 +7,14 @@ interface NPMPackagesState {
     isLoading: boolean;
 }
 
+const initialState = {
+    data: [],
+    error: null,
+    isLoading: false,
+};
+
 const npmPackagesReducer = (
-    state: NPMPackagesState,
+    state: NPMPackagesState = initialState,
     action: Action
 ): NPMPackagesState => {
     switch (action.type) {
