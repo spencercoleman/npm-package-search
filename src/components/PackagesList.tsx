@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
+import { Button, Input, Text, Stack, Loader } from '@mantine/core';
 
 const PackagesList = (): JSX.Element => {
     const { data, error, isLoading } = useTypedSelector(
@@ -9,30 +10,59 @@ const PackagesList = (): JSX.Element => {
     const [term, setTerm] = useState('');
     const { searchPackages } = useActions();
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTerm(event.target.value);
+    };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         searchPackages(term);
     };
 
     return (
-        <div>
+        <Stack>
             <form onSubmit={handleSubmit}>
-                <input value={term} onChange={(e) => setTerm(e.target.value)} />
-                <button>Search</button>
+                <Input
+                    value={term}
+                    onChange={handleChange}
+                    rightSection={
+                        <Button type="submit" color="dark" radius="md">
+                            Search
+                        </Button>
+                    }
+                    rightSectionWidth={87}
+                    radius="md"
+                    variant="filled"
+                    size="md"
+                    placeholder="Package name"
+                    required
+                />
             </form>
 
-            {error && <strong>{error}</strong>}
-
-            {isLoading && <strong>Loading...</strong>}
-
-            {!error && !isLoading && (
-                <ul>
-                    {data.map((name, index) => (
-                        <li key={index}>{name}</li>
-                    ))}
-                </ul>
+            {error && (
+                <Text color="red" size="sm">
+                    {error}
+                </Text>
             )}
-        </div>
+
+            {isLoading && (
+                <Loader
+                    color="dark"
+                    variant="dots"
+                    size="lg"
+                    mx="auto"
+                    my="xl"
+                />
+            )}
+
+            {!error && !isLoading && data.length > 0 && (
+                <div>
+                    {data.map((name, index) => (
+                        <div key={index}>{name}</div>
+                    ))}
+                </div>
+            )}
+        </Stack>
     );
 };
 
