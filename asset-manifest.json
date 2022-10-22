@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/npm-package-search/static/js/main.b8b225cb.js",
+    "index.html": "/npm-package-search/index.html",
+    "main.b8b225cb.js.map": "/npm-package-search/static/js/main.b8b225cb.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.b8b225cb.js"
+  ]
+}
