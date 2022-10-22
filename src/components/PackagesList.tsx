@@ -1,7 +1,16 @@
 import { useState } from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
-import { Button, Input, Text, Stack, Loader } from '@mantine/core';
+import {
+    Button,
+    Input,
+    Text,
+    Stack,
+    Loader,
+    ScrollArea,
+    Table,
+    Anchor,
+} from '@mantine/core';
 
 const PackagesList = (): JSX.Element => {
     const { data, error, isLoading } = useTypedSelector(
@@ -34,8 +43,10 @@ const PackagesList = (): JSX.Element => {
                     radius="md"
                     variant="filled"
                     size="md"
+                    mx="auto"
                     placeholder="Package name"
                     required
+                    sx={{ maxWidth: 400 }}
                 />
             </form>
 
@@ -56,11 +67,51 @@ const PackagesList = (): JSX.Element => {
             )}
 
             {!error && !isLoading && data.length > 0 && (
-                <div>
-                    {data.map((npmPackage, index) => (
-                        <div key={index}>{npmPackage.name}</div>
-                    ))}
-                </div>
+                <ScrollArea mt="md">
+                    <Table verticalSpacing="sm">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Version</th>
+                                <th>Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((npmPackage, index) => {
+                                const {
+                                    date,
+                                    description,
+                                    link,
+                                    name,
+                                    version,
+                                } = npmPackage;
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            <Anchor
+                                                href={link}
+                                                target="_blank"
+                                                variant="text"
+                                                weight={700}
+                                                underline
+                                            >
+                                                {name}
+                                            </Anchor>
+                                        </td>
+                                        <td>{description}</td>
+                                        <td>{version}</td>
+                                        <td>
+                                            {new Date(
+                                                date
+                                            ).toLocaleDateString()}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </Table>
+                </ScrollArea>
             )}
         </Stack>
     );

@@ -30,7 +30,7 @@ const App = (): JSX.Element => {
 
     return (
         <Provider store={store}>
-            <Container p="xl" size="xs">
+            <Container p="xl" size="md">
                 <Paper p={30} shadow="md" radius="lg">
                     <Stack spacing="xl">
                         <Box sx={{ textAlign: 'center' }}>

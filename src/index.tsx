@@ -23,7 +23,7 @@ root.render(
                 },
 
                 '#root': {
-                    height: '100vh',
+                    minHeight: '100vh',
                 },
 
                 '.mantine-Input-input': {
