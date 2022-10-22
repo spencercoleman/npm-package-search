@@ -1,8 +1,16 @@
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
+type NPMPackage = {
+    date: string;
+    description: string;
+    link: string;
+    name: string;
+    version: string;
+};
+
 interface NPMPackagesState {
-    data: string[];
+    data: NPMPackage[];
     error: string | null;
     isLoading: boolean;
 }

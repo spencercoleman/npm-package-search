@@ -57,8 +57,8 @@ const PackagesList = (): JSX.Element => {
 
             {!error && !isLoading && data.length > 0 && (
                 <div>
-                    {data.map((name, index) => (
-                        <div key={index}>{name}</div>
+                    {data.map((npmPackage, index) => (
+                        <div key={index}>{npmPackage.name}</div>
                     ))}
                 </div>
             )}

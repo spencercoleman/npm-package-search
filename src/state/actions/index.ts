@@ -1,5 +1,13 @@
 import { ActionType } from '../action-types';
 
+type NPMPackage = {
+    date: string;
+    description: string;
+    link: string;
+    name: string;
+    version: string;
+};
+
 interface SearchPackagesAction {
     type: ActionType.SEARCH_NPM_PACKAGES;
     payload?: any;
@@ -7,7 +15,7 @@ interface SearchPackagesAction {
 
 interface SearchPackagesSuccessAction {
     type: ActionType.SEARCH_NPM_PACKAGES_SUCCESS;
-    payload: string[];
+    payload: NPMPackage[];
 }
 
 interface SearchPackagesErrorAction {

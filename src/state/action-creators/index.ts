@@ -20,7 +20,16 @@ export const searchPackages = (term: string) => {
             );
 
             const npmPackages = data.objects.map((result: any) => {
-                return result.package.name;
+                const { date, description, name, version, links } =
+                    result.package;
+
+                return {
+                    date,
+                    description,
+                    name,
+                    link: links.npm,
+                    version,
+                };
             });
 
             dispatch({
